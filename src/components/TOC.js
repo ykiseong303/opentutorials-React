@@ -3,13 +3,23 @@ import React, { Component } from 'react';
 
 // TOC : Table Of Content
 class TOC extends Component{
+
     render() {
-      return(
+        // App 컴포넌트로부터 전달받은 props
+        var data = this.props.data;
+        var i = 0;
+        // 반복시킬 태그를 담는 리스트
+        var list = [];
+        while(i < data.length) {
+            // 엘리먼트를 자동적으로 생성하는 경우 key라는 항목을 가지고 있어야함
+            list.push(<li key={data[i].id}><a href={"./content/"+data[i].id+'.html'}>{data[i].title}
+            </a></li>)
+            i = i+1;
+        }
+        return(
         <nav>
               <ul>
-                  <li><a href="1.html">HTML</a></li>
-                  <li><a href="2.html">CSS</a></li>
-                  <li><a href="3.html">JavaScript</a></li>
+                  {list}
               </ul>
         </nav>
       );
