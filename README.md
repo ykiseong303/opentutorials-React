@@ -1,9 +1,12 @@
 ### Opentutorials React.js 과정 
-생활코딩의 이고잉님 강의 영상을 기반으로 구현한 프로젝트입니다 
+생활코딩 이고잉님의 강의 영상을 기반으로 구현한 프로젝트입니다 
 
 (URL https://www.opentutorials.org/module/4058)
+
+### 프로젝트 목표
++ react.js의 개발환경 구축 및 기초문법 숙달
+
 ### 커리큘럼
-[TOCM]
 + 1일차(01.12)  
   + 컴포넌트 제작
   + 컴포넌트의 props 사용
