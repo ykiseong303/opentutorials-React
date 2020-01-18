@@ -12,7 +12,15 @@ class TOC extends Component{
         var list = [];
         while(i < data.length) {
             // 엘리먼트를 자동적으로 생성하는 경우 key라는 항목을 가지고 있어야함
-            list.push(<li key={data[i].id}><a href={"./content/"+data[i].id+'.html'}>{data[i].title}
+            list.push(<li key={data[i].id}>
+              <a 
+                href={"./content/"+data[i].id+'.html'}
+                onClick={function(e){
+                  e.preventDefault();
+                  data-id = data.id;
+                  this.props.onChangePage();
+                }.bind(this)}
+                >{data[i].title}
             </a></li>)
             i = i+1;
         }
