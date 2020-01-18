@@ -15,10 +15,21 @@ class TOC extends Component{
             list.push(<li key={data[i].id}>
               <a 
                 href={"./content/"+data[i].id+'.html'}
+                // 이 값은 검사의 a태그 엘리먼트의 항목에서 확인이 가능함
+                // props의 값을 a태그의 data-id라는 속성명으로 정의함
+                // 각 태그별로 data-id와 그에 맞는 id값을 가지고 있음
+
+                // 따라서 a태그에 접근을 할 수 있으면 id값을 가져올 수 있음
+                // 현재순번의 data[i]임을 유의
+                data-id = {data[i].id}
                 onClick={function(e){
+                  // onClick발생시 지정되는 익명함수의 인자인 
+                  // e객체에는 target이라는 속성이 있는데
+                  // 클릭이 발생한 태그, 여기서는 a를 가리킴
+                  // 즉, e.target의 dataset으로 접근이 가능함
+                  // 왜인지는 모르겠는데 data-의 시작은 dataset으로 찾으면됨
                   e.preventDefault();
-                  data-id = data.id;
-                  this.props.onChangePage();
+                  this.props.onChangePage(e.target.dataset.id);
                 }.bind(this)}
                 >{data[i].title}
             </a></li>)
