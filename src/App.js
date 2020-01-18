@@ -20,6 +20,8 @@ class App extends Component {
     this.state={
       // 웹 페이지의 상태를 나타내는 state, welcome state와 연결
       mode:'read',
+      // 현재 선택된 컨텐츠의 id
+      // 향후 contents객체있는 id값과 비교
       selected_content_id:1,
       welcome:{title:'Welcome', desc:'Hello, React!'},
       // subject라는 이름의 property (state상에서 존재)
@@ -41,8 +43,11 @@ class App extends Component {
     } else if (this.state.mode === 'read') {
       var i = 0;
       while(i<this.state.contents.length){
+        // 현재 순번에 해당되는 컨텐츠
         var data = this.state.contents[i];
+        // 선택한 컨텐츠의 id와 컨텐츠 목록의 id를 순회하며 비교
         if(data.id === this.state.selected_content_id) {
+          // 일치하는 항목이 있다면 현재 순번의 값으로 지정 
           _title = data.title;
           _desc = data.desc;
           break;
@@ -71,6 +76,7 @@ class App extends Component {
             this.setState(
               {
                 mode:'read',
+                selected_content_id:Number(id),
               }
               );
           }.bind(this)}
