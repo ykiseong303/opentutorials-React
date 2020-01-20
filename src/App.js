@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 // 현재 디렉토리 아래에 componenet 디렉토리의 TOC.js 파일 import
 import TOC from "./components/TOC";
-import Content from "./components/Content";
+import ReadContent from "./components/ReadContent";
+import CreateContent from "./components/CreateContent";
 import Subject from "./components/Subject";
+import Control from "./components/Control";
 import './App.css';
 
 
@@ -19,7 +21,7 @@ class App extends Component {
     // App 컴포넌트가 내부적으로 사용할 상태는 여기서 지정한 state
     this.state={
       // 웹 페이지의 상태를 나타내는 state, welcome state와 연결
-      mode:'read',
+      mode:'create',
       // 현재 선택된 컨텐츠의 id
       // 향후 contents객체있는 id값과 비교
       selected_content_id:1,
@@ -36,10 +38,11 @@ class App extends Component {
   }
   render() {
     // 웹 페이지의 status를 확인하고 그에 따른 동적 화면 출력
-    var _title, _desc = null;
+    var _title, _desc, _article = null;
     if(this.state.mode === 'welcome') {
       _title = this.state.welcome.title;
       _desc = this.state.welcome.desc;
+      _article = <ReadContent title={_title} desc={_desc}  ></ReadContent>
     } else if (this.state.mode === 'read') {
       var i = 0;
       while(i<this.state.contents.length){
@@ -54,7 +57,13 @@ class App extends Component {
         }
         i = i+1;
       }
+      // 모드가 웰컴이나 read일 경우 ReadContent 컴포넌트 호출
+       _article = <ReadContent title={_title} desc={_desc}  ></ReadContent>
+    } else if(this.state.mode ==='create') {
+      _article = <CreateContent></CreateContent>
     }
+
+
     return (
       // 컴포넌트의 props 값들을 state로 바꾸고 
       // state의 값을 해당 컴포넌트로 전달하는 방식 적용
@@ -81,7 +90,15 @@ class App extends Component {
               );
           }.bind(this)}
           data={this.state.contents}></TOC>
-        <Content title={_title} desc={_desc}  ></Content>
+        <Control onChangeMode={function(_mode){
+          this.setState({
+            mode : _mode,
+          });
+        }.bind(this)}>
+        </Control>
+        {/* 모드 변경에 따른 컴포넌트 지정을 위한 변수 */}
+        {_article}
+        
       </div>
     );
   }
