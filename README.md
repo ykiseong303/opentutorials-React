@@ -89,4 +89,46 @@
     </header>
     ```
   > 개념 이해를 위해 Subject.js의 컴포넌트를 App.js로 가져와서 구현
-
++ 4일차(01.16 ~ 01.19)
+  + 현재 선택된 컨텐츠의 id를 지정하는 state 
+  ```react.js
+  selected_content_id:1,
+  ```
+  + 현재 순번 컨텐츠 id와 선택한 컨텐츠의 id값 비교
+  ```react.js
+      var i = 0;
+      while(i<this.state.contents.length){
+        var data = this.state.contents[i];
+        if(data.id === this.state.selected_content_id) {
+          _title = data.title;
+          _desc = data.desc;
+          break;
+        }
+        i = i+1;
+      }
+  ```
+  + 이벤트 발생시 state를 변경하고, render 재호출
+  ```react.js
+          <TOC 
+          onChangePage={function(id){
+            this.setState(
+              {
+                mode:'read',
+                selected_content_id:Number(id),
+              }
+              );
+          }.bind(this)}
+          data={this.state.contents}>
+          </TOC>
+  ```
+  > 익명함수의 인자(클릭한 태그의 id값)를 setState()
+  + 클릭 발생시 상위컴포넌트의 함수 실행(TOC.js)
+  ```react.js
+  data-id = {data[i].id}
+  ```
+  > 각 리스트의 a태그에 data-id라는 속성과 id값을 지정함
+  ```react.js
+  this.props.onChangePage(e.target.dataset.id);
+  ```
+  > 태그내 익명함수시 생기는 e객체로 해당태그로 접근
+  > 위에서 지정한 data-id 속성은 dataset이라는 카테고리에서 확인가능
