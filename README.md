@@ -54,38 +54,38 @@
 + 3일차(01.14 ~ 01.15)
   + 앱의 이벤트 상황을 기억하기 위한 state 지정 (App.js)
   ```react.js
-     mode:'read',
-     welcome:{title:'Welcome', desc:'Hello, React!'}, 
+   mode:'read',
+   welcome:{title:'Welcome', desc:'Hello, React!'}, 
   ```
   ```react.js
-    // 웹 페이지의 status를 확인하고 그에 따른 동적 화면 출력
-    var _title, _desc = null;
-    if(this.state.mode === 'welcome') {
-      _title = this.state.welcome.title;
-      _desc = this.state.welcome.desc;
-    } else if (this.state.mode === 'read') {
-      _title = this.state.contents[0].title;
-      _desc = this.state.contents[0].desc;
-    }
+  // 웹 페이지의 status를 확인하고 그에 따른 동적 화면 출력
+  var _title, _desc = null;
+  if(this.state.mode === 'welcome') {
+    _title = this.state.welcome.title;
+    _desc = this.state.welcome.desc;
+  } else if (this.state.mode === 'read') {
+    _title = this.state.contents[0].title;
+    _desc = this.state.contents[0].desc;
+  }
   ```
   + event 구현
   ```react.js
     <header>
-          {/*클릭 이벤트 설치(onClick)*/}
-          <h1><a href="/" onClick={ function(e){
-          // 페이지 리로드를 막기 위한 함수
-            e.preventDefault();
-          // setState : state의 값을 변경하고 컴포넌트에 알림
-            this.setState({
-              mode : 'welcome'
-            });
-          // 익명 function 안에 사용된 this는 undefined를 가리키므로 
-          // .bind(this)를 사용해서 해당 컴포넌트를 강제로 가리키게 함
-          }.bind(this)}
-          
-          >{this.state.subject.title} </a>
-          </h1>
-          {this.state.subject.sub}
+      {/*클릭 이벤트 설치(onClick)*/}
+      <h1><a href="/" onClick={ function(e){
+      // 페이지 리로드를 막기 위한 함수
+        e.preventDefault();
+      // setState : state의 값을 변경하고 컴포넌트에 알림
+        this.setState({
+          mode : 'welcome' 
+        });
+      // 익명 function 안에 사용된 this는 undefined를 가리키므로 
+      // .bind(this)를 사용해서 해당 컴포넌트를 강제로 가리키게 함
+      }.bind(this)}
+
+      >{this.state.subject.title} </a>
+      </h1>
+      {this.state.subject.sub}
     </header>
     ```
   > 개념 이해를 위해 Subject.js의 컴포넌트를 App.js로 가져와서 구현
@@ -96,30 +96,30 @@
   ```
   + 현재 순번 컨텐츠 id와 선택한 컨텐츠의 id값 비교
   ```react.js
-      var i = 0;
-      while(i<this.state.contents.length){
-        var data = this.state.contents[i];
-        if(data.id === this.state.selected_content_id) {
-          _title = data.title;
-          _desc = data.desc;
-          break;
-        }
-        i = i+1;
-      }
+  var i = 0;
+  while(i<this.state.contents.length){
+    var data = this.state.contents[i];
+    if(data.id === this.state.selected_content_id) {
+      _title = data.title;
+      _desc = data.desc;
+      break;
+    }
+    i = i+1;
+  }
   ```
   + 이벤트 발생시 state를 변경하고, render 재호출
   ```react.js
-          <TOC 
-          onChangePage={function(id){
-            this.setState(
-              {
-                mode:'read',
-                selected_content_id:Number(id),
-              }
-              );
-          }.bind(this)}
-          data={this.state.contents}>
-          </TOC>
+  <TOC 
+  onChangePage={function(id){
+    this.setState(
+      {
+        mode:'read',
+        selected_content_id:Number(id),
+      }
+      );
+  }.bind(this)}
+  data={this.state.contents}>
+  </TOC>
   ```
   > 익명함수의 인자(클릭한 태그의 id값)를 setState()
   + 클릭 발생시 상위컴포넌트의 함수 실행(TOC.js)
