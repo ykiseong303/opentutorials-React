@@ -134,3 +134,21 @@
   > 위에서 지정한 data-id 속성은 dataset이라는 카테고리에서 확인가능
 + 5일차(01.20)
   + create 구현
+  + components 디렉토리에 Control컴포넌트를 추가하고, Content컴포넌트를 CreateContent와 ReadContent로 분할
+  + Control컴포넌트에 모드를 변경하기 위한 항목 추가
+  ```react.js
+  <Control onChangeMode={function(_mode){
+    this.setState({
+      mode : _mode,
+    });
+  }.bind(this)}>
+  </Control>
+  ```
+  + 모드변경시 컴포넌트를 변경하기 위한 항목 추가
+  ```react.js
+  else if(this.state.mode ==='create') {
+      _article = <CreateContent></CreateContent>
+    }
+  ```
+  > _article 항목에 태그를 저장, read모드일 경우에는 ReadContent컴포넌트와 title, desc값 전달
+  + CreateContent 컴포넌트에 입력하기 위한 폼 태그 작성
