@@ -152,3 +152,5 @@
   ```
   > _article 항목에 태그를 저장, read모드일 경우에는 ReadContent컴포넌트와 title, desc값 전달
   + CreateContent 컴포넌트에 입력하기 위한 폼 태그 작성
++ 6일차(01.21 ~ 01.22)
+  + update & delete 구현
