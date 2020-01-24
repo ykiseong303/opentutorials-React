@@ -1,5 +1,5 @@
 ### Opentutorials React.js 과정 
-+ 생활코딩 이고잉님의 강의 영상을 기반으로 구현한 프로젝트입니다 
++ 생활코딩 이고잉님의 강의 영상을 기반으로 구현한 프로젝트입니다 (마무리)
 
 (URL https://www.opentutorials.org/module/4058)
 
