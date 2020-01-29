@@ -7,7 +7,12 @@
 + react.js의 개발환경 구축 및 기초문법 숙달
 
 ### 개발환경 구축
-+ npx install create-react-app
+```
+cd Desktop
+mkdir react-app
+create-react-app
+npm run start
+```
 ### 커리큘럼
 + 1일차(01.12)  
   + 컴포넌트 제작
@@ -153,4 +158,61 @@
   > _article 항목에 태그를 저장, read모드일 경우에는 ReadContent컴포넌트와 title, desc값 전달
   + CreateContent 컴포넌트에 입력하기 위한 폼 태그 작성
 + 6일차(01.21 ~ 01.22)
-  + update & delete 구현
+  + 함수 리팩토링 구현
+  ```react.js
+  getReadContent()
+  getContent()
+  ```
+  > getContent()는 리턴값으로 article이라는 태그를 가짐. App.js에서 모든 컴포넌트를 return 하는 곳에서 호출
+  + update 구현
+  ```react.js
+  else if (this.state.mode === 'update')
+  ```
+  > mode 변경 조건문 
+  ```react.js
+  var _content = this.getReadContent();
+  <UpdateContent data = {_content}></UpdateContent>
+  ```
+  > 현재 선택한 항목의 id, title, desc를 props로 전달
+  ```react.js
+  onSubmit = {function(_id, _title, _desc){
+    var _contents = Array.from(this.state.contents);
+    var i = 0;
+    while(i<_contents.length) {
+      if(_contents[i].id === _id) {
+        _contents[i] = {id:_id, title : _title, desc : _desc}
+      }
+      this.setState({
+        contents : _contents, 
+        mode : 'read'
+      })
+      i = i + 1;
+    }
+  }.bind(this)}
+  ```
+  > 현재 contents를 복제 후, 복제된 배열에 변경된 값을 저장
+  + delete 구현
+  ```react.js
+  if(_mode === 'delete')
+  else { }
+  ```
+  > Control 컴포넌트에서 모드 구분(delete는 별개로 진행해야함)
+  ```react.js
+  if(_contents[i].id === this.state.selected_content_id){
+    _contents.splice(i,1);
+    this.max_content_id = this.max_content_id - 1
+    break;
+  }
+  ```
+  > 선택한 항목의 id와 복제한 배열의 id가 같을 경우 해당 항목을 삭제
+  > max_content_id를 -1 해서 삭제 후 남은 항목수를 반영하도록 함
+  ```react.js
+  this.setState({
+    mode:'welcome',
+    contents:_contents,
+  });
+  ```
+  > 삭제후, mode와 contents 항목 setState
+  
+  
+  
